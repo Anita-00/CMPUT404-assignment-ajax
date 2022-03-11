@@ -35,8 +35,7 @@ app.debug = True
 
 class World:
     def __init__(self):
-        #self.clear()
-        self.space = {'a':{'x':1, 'y':2},'b':{'x':2, 'y':3}}
+        self.clear()
         
     def update(self, entity, key, value):
         entry = self.space.get(entity,dict())
@@ -81,11 +80,9 @@ def hello():
 def update(entity):
     '''update the entities via this interface'''
     data = flask_post_json()
-    #key = max(myWorld.world.keys())
-    #print(key)
-    #chr(ord(y) + 1)
-    #return myWorld.update(entity, )
-    return "Hello"
+    for key in data.keys():
+        myWorld.update(entity, key, data[key])
+    return myWorld.get(entity)
 
 @app.route("/world", methods=['POST','GET'])    
 def world():
